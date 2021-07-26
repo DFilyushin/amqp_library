@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: web
+    restart: on-failure
+    build:
+      dockerfile: docker/app/Dockerfile
+      context: .
+      args:
+        CI_JOB_TOKEN: ${CI_JOB_TOKEN}
+    volumes:
+      - ./poetry.lock:/project/poetry.lock
+      - ./pyproject.toml:/project/pyproject.toml
+    depends_on:
+      - rabbitmq
+      - mongodb
+    links:
+      - rabbitmq
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    ports:
+      - 5672:5672
+      - 15672:15672

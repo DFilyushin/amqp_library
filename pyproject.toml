@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "amqp_library"
+version = "0.1.0"
+description = "Microservice for getting book by queue"
+authors = ["Dmitriy Filyushin <dmitriy.filyushin@yandex.ru>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.66.0"
+injector = "^0.18.4"
+prometheus-client = "^0.11.0"
+typer = "^0.3.2"
+env-file = "^2020.12.3"
+uvicorn = "^0.14.0"
+aio-pika = "^6.8.0"
+accessify = "^0.3.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
